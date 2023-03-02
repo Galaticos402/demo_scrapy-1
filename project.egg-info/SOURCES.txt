@@ -1,0 +1,14 @@
+README.md
+setup.py
+demo_scrapy/__init__.py
+demo_scrapy/items.py
+demo_scrapy/middlewares.py
+demo_scrapy/pipelines.py
+demo_scrapy/settings.py
+demo_scrapy/spiders/__init__.py
+demo_scrapy/spiders/coingecko.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt

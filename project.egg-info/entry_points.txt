@@ -1,0 +1,2 @@
+[scrapy]
+settings = demo_scrapy.settings

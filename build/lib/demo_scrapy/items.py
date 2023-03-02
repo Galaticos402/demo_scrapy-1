@@ -6,7 +6,6 @@
 import scrapy
 
 
-
 class DemoScrapyItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
@@ -18,5 +17,3 @@ class CoinGeckoCrawlerItem(scrapy.Item):
     price = scrapy.Field()
     marketCap = scrapy.Field()
     dayTradingVolume = scrapy.Field()
-
-

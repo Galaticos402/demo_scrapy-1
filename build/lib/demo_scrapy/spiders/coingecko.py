@@ -1,4 +1,6 @@
 import scrapy
+from scrapy.spiders import Rule
+from scrapy.linkextractors import LinkExtractor
 from demo_scrapy.items import CoinGeckoCrawlerItem
 import time
 
