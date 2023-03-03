@@ -92,3 +92,8 @@ REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 ITEM_PIPELINES = {'demo_scrapy.pipelines.MongoDbPipeline': 0}
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 1,
+}
+HTTP_PROXY = 'http://103.169.35.129:3128'
+HTTPS_PROXY = 'http://103.169.35.129:3128'
