@@ -1,4 +1,5 @@
 import scrapy
+import time
 from demo_scrapy.items import CoinGeckoCrawlerItem
 import time
 
@@ -27,6 +28,7 @@ class CoingeckoSpider(scrapy.Spider):
 
         for item_url in urls:
             # print(item_url)
+            time.sleep(1)
             yield scrapy.Request(response.urljoin(item_url), callback=self.parse_coin)
 
         # has_next_page = 'page-item next' == response.css("ul.pagination > li.page-item:nth-last-child(1)").xpath('@class').extract_first()
