@@ -40,14 +40,14 @@ class CoingeckoSpider(scrapy.Spider):
 
         for item_url in urls:
             # print(item_url)
-            time.sleep(1)
+            # time.sleep(1)
             yield scrapy.Request(response.urljoin(item_url), callback=self.parse_coin, headers={"User-Agent": self.user_agent_list[random.randint(0, len(self.user_agent_list)-1)]})
 
         # has_next_page = 'page-item next' == response.css("ul.pagination > li.page-item:nth-last-child(1)").xpath('@class').extract_first()
         if self.current_page <= 3:
             print('\n\n\n\n\n' + str(self.current_page))
             self.current_page += 1
-            time.sleep(1)
+            # time.sleep(1)
             yield scrapy.Request(response.urljoin('/?page=' + str(self.current_page)), callback=self.parse, headers={"User-Agent": self.user_agent_list[random.randint(0, len(self.user_agent_list)-1)]})
 
     def parse_coin(self, response):
