@@ -4,6 +4,7 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from scrapy.downloadermiddlewares.httpproxy import HttpProxyMiddleware
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
@@ -101,3 +102,14 @@ class DemoScrapyDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info("Spider opened: %s" % spider.name)
+
+class ProxyMiddleware(HttpProxyMiddleware):
+    def __init__(self, proxy_url):
+        self.proxy_url = proxy_url
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(proxy_url=crawler.settings.get('PROXY_URL'))
+
+    def process_request(self, request, spider):
+        request.meta['proxy'] = self.proxy_url

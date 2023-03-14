@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = "demo_scrapy.spiders"
 #USER_AGENT = "demo_scrapy (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -88,13 +88,9 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
 
 # Set settings whose default value is deprecated to a future-proof value
-REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
-TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 ITEM_PIPELINES = {'demo_scrapy.pipelines.MongoDbPipeline': 0}
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 1,
-}
-HTTP_PROXY = 'http://103.169.35.129:3128'
-HTTPS_PROXY = 'http://103.169.35.129:3128'
-DOWNLOAD_DELAY = 2
+# DOWNLOADER_MIDDLEWARES = {
+#     'demo_scrapy.middlewares.ProxyMiddleware': 350,
+# }
+PROXY_URL = 'http://minhquan040501:TP5hr9EUPU@185.155.233.137:50100'
