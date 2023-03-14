@@ -90,7 +90,7 @@ ROBOTSTXT_OBEY = False
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
 ITEM_PIPELINES = {'demo_scrapy.pipelines.MongoDbPipeline': 0}
-# DOWNLOADER_MIDDLEWARES = {
-#     'demo_scrapy.middlewares.ProxyMiddleware': 350,
-# }
+DOWNLOADER_MIDDLEWARES = {
+    'demo_scrapy.middlewares.ProxyMiddleware': 350,
+}
 PROXY_URL = 'http://minhquan040501:TP5hr9EUPU@185.155.233.137:50100'
