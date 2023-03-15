@@ -18,7 +18,7 @@ class CoingeckoSpider(scrapy.Spider):
 
         for item_url in urls:
 
-            # time.sleep(1)
+            time.sleep(1)
             request = scrapy.Request(response.urljoin(item_url), callback=self.parse_coin)
             yield request
 
@@ -26,7 +26,7 @@ class CoingeckoSpider(scrapy.Spider):
         if self.current_page <= 3:
             print('\n\n\n\n\n' + str(self.current_page))
             self.current_page += 1
-            # time.sleep(1)
+            time.sleep(1)
             request = scrapy.Request(response.urljoin('/?page=' + str(self.current_page)), callback=self.parse)
             yield request
 
