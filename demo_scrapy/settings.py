@@ -93,4 +93,4 @@ ITEM_PIPELINES = {'demo_scrapy.pipelines.MongoDbPipeline': 0}
 DOWNLOADER_MIDDLEWARES = {
     'demo_scrapy.middlewares.ProxyMiddleware': 350,
 }
-PROXY_URL = 'http://minhquan040501:TP5hr9EUPU@185.155.233.137:50100'
+PROXY_URL = 'http://minhquan040501:TP5hr9EUPU@31.130.204.38:50100'
