@@ -18,7 +18,10 @@ class CoingeckoSpider(scrapy.Spider):
 
         for item_url in urls:
 
-            time.sleep(1)
+            time.sleep(5)
+            # headers = {
+            #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+            # }
             request = scrapy.Request(response.urljoin(item_url), callback=self.parse_coin)
             yield request
 
@@ -26,7 +29,10 @@ class CoingeckoSpider(scrapy.Spider):
         if self.current_page <= 3:
             print('\n\n\n\n\n' + str(self.current_page))
             self.current_page += 1
-            time.sleep(1)
+            time.sleep(5)
+            # headers = {
+            #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+            # }
             request = scrapy.Request(response.urljoin('/?page=' + str(self.current_page)), callback=self.parse)
             yield request
 
