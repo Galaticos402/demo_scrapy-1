@@ -13,8 +13,8 @@ class DemoScrapyItem(scrapy.Item):
     pass
 
 class CoinGeckoCrawlerItem(scrapy.Item):
-    name = scrapy.Field()
-    code = scrapy.Field()
+    Name = scrapy.Field()
+    Code = scrapy.Field()
     price = scrapy.Field()
     marketCap = scrapy.Field()
     dayTradingVolume = scrapy.Field()
@@ -22,5 +22,7 @@ class CoinGeckoCrawlerItem(scrapy.Item):
     circulatingSupply = scrapy.Field()
     Total_Supply = scrapy.Field()
     Max_Supply = scrapy.Field()
+    # Info section
+    Websites = scrapy.Field()
 
 
