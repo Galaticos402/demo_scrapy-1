@@ -10,10 +10,10 @@ from urllib.parse import urlencode
 class CoingeckoSpider(scrapy.Spider):
     urlSeen = []
     name = 'coingecko'
-    allowed_domains = ['www.coingecko.com','localhost']
+    allowed_domains = ['www.coingecko.com','coingeckochainblade.azurewebsites.net']
     start_urls = ['https://www.coingecko.com']
     # temporary endpoint for testing
-    api_endpoint = "https://localhost:44307/api/Coingecko/insert"
+    api_endpoint = "https://coingeckochainblade.azurewebsites.net/api/Coingecko/add"
     current_page = 1
 
     def parse(self, response):
@@ -69,8 +69,8 @@ class CoingeckoSpider(scrapy.Spider):
             'Code': response.css('h1 > span.tw-font-normal ::text').extract_first().strip(),
         }
         request = scrapy.Request(url=self.api_endpoint, method='POST', body=json.dumps(params), headers={'Content-Type':'application/json'}, callback=self.process_result)
-        yield request;
-        # yield item
+        yield request
+        yield item
 
     def process_result(self, response):
         print(response)
