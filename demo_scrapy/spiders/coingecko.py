@@ -74,3 +74,4 @@ class CoingeckoSpider(scrapy.Spider):
 
     def process_result(self, response):
         print(response)
+        print(response)
