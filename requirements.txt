@@ -1,0 +1,4 @@
+itemadapter==0.7.0
+pymongo==4.3.3
+pymssql==2.2.7
+pyodbc==4.0.35

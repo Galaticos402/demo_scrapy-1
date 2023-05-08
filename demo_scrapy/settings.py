@@ -89,8 +89,16 @@ HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
 
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
-# ITEM_PIPELINES = {'demo_scrapy.pipelines.MongoDbPipeline': 0}
+ITEM_PIPELINES = {'demo_scrapy.pipelines.MongoDbPipeline': 0}
 DOWNLOADER_MIDDLEWARES = {
-    'demo_scrapy.middlewares.ProxyMiddleware': 350,
+    'demo_scrapy.middlewares.RandomProxyMiddleware': 350,
 }
-PROXY_URL = 'http://minhquan040501:TP5hr9EUPU@154.16.150.210:50100'
+PROXIES = [
+    'http://minhquan040501:TP5hr9EUPU@185.155.233.160:50100',
+    'http://minhquan040501:TP5hr9EUPU@86.38.177.81:50100',
+    'http://minhquan040501:TP5hr9EUPU@86.38.177.139:50100',
+    'http://minhquan040501:TP5hr9EUPU@45.140.211.193:50100',
+    'http://minhquan040501:TP5hr9EUPU@86.38.177.150:50100',
+    'http://minhquan040501:TP5hr9EUPU@185.241.150.87:50100',
+
+]

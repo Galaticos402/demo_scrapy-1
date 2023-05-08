@@ -113,3 +113,16 @@ class ProxyMiddleware(HttpProxyMiddleware):
 
     def process_request(self, request, spider):
         request.meta['proxy'] = self.proxy_url
+
+import random
+
+class RandomProxyMiddleware:
+    def __init__(self, proxies):
+        self.proxies = proxies
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(proxies=crawler.settings.getlist('PROXIES'))
+
+    def process_request(self, request, spider):
+        request.meta['proxy'] = random.choice(self.proxies)
