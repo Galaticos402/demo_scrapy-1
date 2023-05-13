@@ -24,5 +24,12 @@ class CoinGeckoCrawlerItem(scrapy.Item):
     Max_Supply = scrapy.Field()
     # Info section
     Websites = scrapy.Field()
+    Explorer = scrapy.Field()
 
 
+class CoingeckoDynamicItem(scrapy.Item):
+    """
+    A dynamic item class that can be customized at runtime.
+    """
+    def __setitem__(self, key, value):
+        self._values[key] = value
