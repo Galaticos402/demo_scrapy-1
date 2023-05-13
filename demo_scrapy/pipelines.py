@@ -8,7 +8,6 @@
 from itemadapter import ItemAdapter
 import pymongo
 import pymssql
-import pyodbc
 
 class DemoScrapyPipeline:
     def process_item(self, item, spider):
@@ -24,18 +23,4 @@ class MongoDbPipeline:
         self.collection = db["coins"]
     def process_item(self, item, spider):
         self.collection.insert_one(dict(item))
-        return item
-
-class MSSQLDbPipeline:
-    def __init__(self):
-        self.conn = pyodbc.connect(driver='{ODBC Driver 17 for SQL Server}', server='tcp:chainblade.database.windows.net,1433', user='mquan', password='wuandmSE150021@', database='ChainBlade')
-        self.cursor = self.conn.cursor()
-
-    def process_item(self, item, spider):
-        try:
-            self.cursor.execute("INSERT INTO Coin(name, code, price) VALUES (?, ?, ?)",
-                                (item['name'], item['code'], item['price']))
-            self.conn.commit()
-        except pymssql.Error as e:
-            print("error")
         return item

@@ -100,5 +100,4 @@ PROXIES = [
     'http://minhquan040501:TP5hr9EUPU@45.140.211.193:50100',
     'http://minhquan040501:TP5hr9EUPU@86.38.177.150:50100',
     'http://minhquan040501:TP5hr9EUPU@185.241.150.87:50100',
-
 ]

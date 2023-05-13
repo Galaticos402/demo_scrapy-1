@@ -23,7 +23,6 @@ class MongoDbPipeline:
         db = connection["crawler_sample"]
         self.collection = db["coins"]
     def process_item(self, item, spider):
-        print("Pipeline called")
         self.collection.insert_one(dict(item))
         return item
 
