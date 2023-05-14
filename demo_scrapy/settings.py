@@ -90,9 +90,17 @@ HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
 ITEM_PIPELINES = {'demo_scrapy.pipelines.MongoDbPipeline': 0}
+DOWNLOAD_HANDLERS = {
+    "http": "scrapy_zyte_api.ScrapyZyteAPIDownloadHandler",
+    "https": "scrapy_zyte_api.ScrapyZyteAPIDownloadHandler",
+}
 DOWNLOADER_MIDDLEWARES = {
+    "scrapy_zyte_api.ScrapyZyteAPIDownloaderMiddleware": 1000,
     'demo_scrapy.middlewares.RandomProxyMiddleware': 350,
 }
+REQUEST_FINGERPRINTER_CLASS = "scrapy_zyte_api.ScrapyZyteAPIRequestFingerprinter"
+ZYTE_API_KEY = "32f22660209e4b27a16275072a0c7651"
+ZYTE_API_TRANSPARENT_MODE = True
 PROXIES = [
     'http://minhquan040501:TP5hr9EUPU@185.155.233.160:50100',
     'http://minhquan040501:TP5hr9EUPU@86.38.177.81:50100',
