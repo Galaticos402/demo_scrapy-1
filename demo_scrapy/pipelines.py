@@ -13,14 +13,18 @@ class DemoScrapyPipeline:
     def process_item(self, item, spider):
         return item
 class MongoDbPipeline:
+    db = None
+    connection = None
     def __init__(self):
-        connection = pymongo.MongoClient(
+        self.connection = pymongo.MongoClient(
            'mongodb+srv://mqd4501:admin@serverlessinstance0.6mgi4.mongodb.net/myFirstDatabase'
            #  "localhost"
             ,27017
         )
-        db = connection["crawler_sample"]
-        self.collection = db["coins"]
+        self.db = self.connection["crawler_sample"]
+        # self.collection = db["coins"]
     def process_item(self, item, spider):
+        collectionName = item.get('Collection')
+        self.collection = self.db[collectionName]
         self.collection.insert_one(dict(item))
         return item

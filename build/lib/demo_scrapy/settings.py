@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = "demo_scrapy.spiders"
 #USER_AGENT = "demo_scrapy (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 32
@@ -68,16 +68,16 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
-AUTOTHROTTLE_ENABLED = True
+# AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-AUTOTHROTTLE_START_DELAY = 5
+# AUTOTHROTTLE_START_DELAY = 5
 # The maximum download delay to be set in case of high latencies
-AUTOTHROTTLE_MAX_DELAY = 60
+# AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
-AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+# AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
-AUTOTHROTTLE_DEBUG = False
+# AUTOTHROTTLE_DEBUG = False
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
@@ -90,14 +90,22 @@ HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
 # Set settings whose default value is deprecated to a future-proof value
 FEED_EXPORT_ENCODING = "utf-8"
 ITEM_PIPELINES = {'demo_scrapy.pipelines.MongoDbPipeline': 0}
-DOWNLOADER_MIDDLEWARES = {
-    'demo_scrapy.middlewares.RandomProxyMiddleware': 350,
+DOWNLOAD_HANDLERS = {
+    "http": "scrapy_zyte_api.ScrapyZyteAPIDownloadHandler",
+    "https": "scrapy_zyte_api.ScrapyZyteAPIDownloadHandler",
 }
-PROXIES = [
-    'http://minhquan040501:TP5hr9EUPU@185.155.233.160:50100',
-    'http://minhquan040501:TP5hr9EUPU@86.38.177.81:50100',
-    'http://minhquan040501:TP5hr9EUPU@86.38.177.139:50100',
-    'http://minhquan040501:TP5hr9EUPU@45.140.211.193:50100',
-    'http://minhquan040501:TP5hr9EUPU@86.38.177.150:50100',
-    'http://minhquan040501:TP5hr9EUPU@185.241.150.87:50100',
-]
+DOWNLOADER_MIDDLEWARES = {
+    "scrapy_zyte_api.ScrapyZyteAPIDownloaderMiddleware": 1000,
+}
+REQUEST_FINGERPRINTER_CLASS = "scrapy_zyte_api.ScrapyZyteAPIRequestFingerprinter"
+TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+ZYTE_API_KEY = "32f22660209e4b27a16275072a0c7651"
+ZYTE_API_TRANSPARENT_MODE = True
+# PROXIES = [
+#     'http://minhquan040501:TP5hr9EUPU@185.155.233.160:50100',
+#     'http://minhquan040501:TP5hr9EUPU@86.38.177.81:50100',
+#     'http://minhquan040501:TP5hr9EUPU@86.38.177.139:50100',
+#     'http://minhquan040501:TP5hr9EUPU@45.140.211.193:50100',
+#     'http://minhquan040501:TP5hr9EUPU@86.38.177.150:50100',
+#     'http://minhquan040501:TP5hr9EUPU@185.241.150.87:50100',
+# ]

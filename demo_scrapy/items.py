@@ -22,9 +22,24 @@ class CoinGeckoCrawlerItem(scrapy.Item):
     CirculatingSupply = scrapy.Field()
     Total_Supply = scrapy.Field()
     Max_Supply = scrapy.Field()
+    Contract_Hash = scrapy.Field()
     # Info section
     Websites = scrapy.Field()
     Explorer = scrapy.Field()
+    Collection = scrapy.Field()
+
+
+
+class TransactionItem(scrapy.Item):
+    Txn_Hash = scrapy.Field()
+    Method = scrapy.Field()
+    Block = scrapy.Field()
+    Age = scrapy.Field()
+    From = scrapy.Field()
+    To = scrapy.Field()
+    Value = scrapy.Field()
+    Txn_Fee = scrapy.Field()
+    Collection = scrapy.Field()
 
 
 class CoingeckoDynamicItem(scrapy.Item):
