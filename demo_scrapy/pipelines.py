@@ -21,7 +21,7 @@ class MongoDbPipeline:
            #  "localhost"
             ,27017
         )
-        self.db = self.connection["crawler_sample"]
+        self.db = self.connection["coingecko"]
         # self.collection = db["coins"]
     def process_item(self, item, spider):
         collectionName = item.get('Collection')

@@ -4,6 +4,7 @@ import time
 import scrapy
 
 from demo_scrapy.items import CoinGeckoCrawlerItem, CoingeckoDynamicItem
+from demo_scrapy.common.mongo_helper import  MongoHelper
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
@@ -18,6 +19,7 @@ class CoingeckoSpider(scrapy.Spider):
     # temporary endpoint for testing
     api_endpoint = "https://coingeckochainblade.azurewebsites.net/api/Coingecko/add"
     current_page = 1
+    mongo_helper = MongoHelper()
 
     def parse(self, response):
         last_page = response.css("ul.pagination > li.page-item:nth-last-child(2) > a ::text").extract_first()
@@ -47,8 +49,9 @@ class CoingeckoSpider(scrapy.Spider):
     def parse_coin(self, response):
         item = CoingeckoDynamicItem()
 
+        coin_code = response.css('h1 > span.tw-font-normal ::text').extract_first().strip()
         item['Name'] = response.css('h1 > span.tw-font-bold ::text').extract_first().strip()
-        item['Code'] = response.css('h1 > span.tw-font-normal ::text').extract_first().strip()
+        item['Code'] = coin_code
         item['Price'] = response.css('span.tw-text-gray-900.tw-text-3xl ::text').extract_first().strip()
         item['MarketCap'] = response.css('body > div.container > div.tw-grid.tw-grid-cols-1.lg\:tw-grid-cols-3.tw-mb-4 > div.tw-col-span-3.md\:tw-col-span-2 > div > div.tw-col-span-2.lg\:tw-col-span-2 > div:nth-child(2) > div:nth-child(1) > div.tw-flex.tw-justify-between.tw-w-full.tw-h-10.tw-py-2\.5.lg\:tw-border-t-0.tw-border-b.tw-border-gray-200.dark\:tw-border-opacity-10.tw-pl-0 > span.tw-text-gray-900.dark\:tw-text-white.tw-font-medium > span ::text').extract_first(default='N/A').strip()
         item['DayTradingVolume'] = response.css('body > div.container > div.tw-grid.tw-grid-cols-1.lg\:tw-grid-cols-3.tw-mb-4 > div.tw-col-span-3.md\:tw-col-span-2 > div > div.tw-col-span-2.lg\:tw-col-span-2 > div:nth-child(2) > div:nth-child(1) > div:nth-child(3) > span.tw-text-gray-900.dark\:tw-text-white.tw-font-medium > span ::text').extract_first(default='N/A').strip()
@@ -62,6 +65,11 @@ class CoingeckoSpider(scrapy.Spider):
         first_row_value = response.css('body > div:nth-child(6) > main > div.tw-grid.tw-grid-cols-1.lg\:tw-grid-cols-3.tw-mb-4 > div.tw-col-span-3.lg\:tw-col-span-1.coin-links-section.lg\:tw-ml-6 > div.tw-hidden.lg\:tw-block.tw-flex.flex-column.tw-mx-2.lg\:tw-mx-3 > div:nth-child(2) > div > div.tw-rounded-md.tw-rounded-r-none.tw-font-medium.tw-bg-gray-100.tw-text-gray-800.dark\:tw-text-white.dark\:tw-bg-opacity-10.hover\:tw-bg-gray-200.dark\:hover\:tw-bg-opacity-20.tw-rounded-l-md > div > i::attr(data-address)').extract_first(default='N/A').strip()
 
         if(first_row_label == 'Contract'):
+            contract_details = {
+                'Coin_Code': coin_code,
+                'Contract_Hash': first_row_value
+            }
+            self.mongo_helper.save(item=contract_details, collection_name="Contract_Hash")
 
 
 
