@@ -50,9 +50,12 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "demo_scrapy.middlewares.DemoScrapyDownloaderMiddleware": 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.retry.RetryMiddleware': 502,
+}
+
+RETRY_HTTP_CODES = [520]
+RETRY_TIMES=3
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html

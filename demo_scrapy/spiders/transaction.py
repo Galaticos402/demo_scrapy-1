@@ -5,6 +5,7 @@ import scrapy
 import random
 from scrapy.spidermiddlewares.httperror import HttpError
 
+from demo_scrapy.common.mongo_helper import MongoHelper
 from demo_scrapy.items import TransactionItem
 from demo_scrapy.settings import USER_AGENT_CHOICES
 
@@ -24,6 +25,7 @@ class TransactionCrawler(scrapy.Spider):
 
 
     def parse(self, response):
+        mongo_helper = MongoHelper()
         while self.current_page <= 10:
             request = scrapy.Request(
                 f'https://etherscan.io/txs?a={self.contract_hash}&p={self.current_page}',
