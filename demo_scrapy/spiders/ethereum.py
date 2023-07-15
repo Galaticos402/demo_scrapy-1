@@ -64,7 +64,8 @@ class EthereumCrawler(scrapy.Spider):
         item['Max_Supply'] = response.css(
             'body > div:nth-child(6) > main > div.tw-grid.tw-grid-cols-1.lg\:tw-grid-cols-3.tw-mb-4 > div.tw-col-span-3.md\:tw-col-span-2 > div > div.tw-col-span-2.lg\:tw-col-span-2 > div:nth-child(2) > div.tailwind-reset.lg\:tw-pl-4.tw-col-span-2.lg\:tw-col-span-1 > div:nth-child(3) > span.tw-text-gray-900.dark\:tw-text-white.tw-font-medium ::text').extract_first(
             default='N/A').strip()
-        item['Collection'] = 'coin_test'
+        item['Collection'] = 'coin'
+
         contract_xpath_list = [
             '/html/body/div[3]/main/div[1]/div[2]/div[2]/div[2]/div/div[1]/div/i/@data-address',
             '/html/body/div[3]/main/div[1]/div[2]/div[2]/div[2]/div/div/div/i/@data-address'
@@ -79,25 +80,5 @@ class EthereumCrawler(scrapy.Spider):
             'Coin_Name': coin_name,
             'Contract_Hash': first_row_value
         }
-        self.mongo_helper.save(item=contract_details, collection_name="contract_hash_test")
-
-        # subDetails = response.css("body > div.container > div.tw-grid.tw-grid-cols-1.lg\:tw-grid-cols-3.tw-mb-4 > div.tw-col-span-3.lg\:tw-col-span-1.coin-links-section.lg\:tw-ml-6 > div.tw-hidden.lg\:tw-block.tw-flex.flex-column.tw-mx-2.lg\:tw-mx-3 > div")
-        # rowNums = len(subDetails)
-        # subInfoContainer = []
-        # for i in range(1,rowNums):
-        #     row = subDetails[i]
-        #     label = row.css('span::text').extract_first()
-        #     data = row.css('div')
-        #     for j in range(1,len(row.css('div > *'))):
-        #         name = data.css(f'a:nth-child({j}) ::text').get()
-        #         link = data.css(f'a:nth-child({j})::attr(href)').get()
-        #         # if(name == 'Contract'):
-        #         #     contract_hash =
-        #         subInfoContainer.append({
-        #             "Name": name,
-        #             "Link": link
-        #         })
-        #     if(label != None):
-        #         item[label] = subInfoContainer
-        #     subInfoContainer = []
+        self.mongo_helper.save(item=contract_details, collection_name="contract_hash")
         yield item

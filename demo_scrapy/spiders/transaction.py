@@ -29,12 +29,11 @@ class TransactionCrawler(scrapy.Spider):
         while self.current_page <= 10:
             request = scrapy.Request(
                 f'https://etherscan.io/txs?a={self.contract_hash}&p={self.current_page}',
-                headers={'User-Agent': self.USER_AGENT}, callback=self.parse_redirected)
+                callback=self.parse_redirected)
             self.current_page += 1
             # time.sleep(1)
             yield request
 
-    #
     def parse_redirected(self, response):
         content_table = response.css('#ContentPlaceHolder1_divTransactions > div.table-responsive > table')
         item = TransactionItem()
